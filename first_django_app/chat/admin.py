@@ -4,6 +4,7 @@ from .models import Message, Chat
 class MessageAdmin(admin.ModelAdmin):
     fields = ('chat','text', 'created_at', 'author', 'receiver')
     list_display = ('created_at', 'author', 'text', 'receiver')
+    search_fields = ('text',)
 
 # Register your models here.
 admin.site.register(Message, MessageAdmin)

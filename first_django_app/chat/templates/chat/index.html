@@ -38,8 +38,13 @@
     <main class="mdl-layout__content">
         <div class="page-content">
 
+            {% if request.user.is_authenticated %}
 
-
+            {% for message in messages %}
+            <div>
+                [{{ message.created_at }}] {{ message.author.first_name }}: {{ message.text }}
+            </div>
+            {% endfor %}
 
             <form action="/chat/" method="post">
                 {% csrf_token %}
@@ -51,6 +56,13 @@
                     Send
                 </button>
             </form>
+
+            {% else %}
+                <h1>nicht eingeloggt</h1>
+                <a href="/login/">Login hier</a>
+            {% endif %}
+
+
 
         </div>
     </main>
